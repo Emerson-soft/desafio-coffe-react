@@ -1,8 +1,8 @@
 import { ComponentProps } from "react"
 import classNames from 'classnames'
 
-type InputRootProps = ComponentProps<'div'>
+type InputRootProps = ComponentProps<'label'>
 
 export function Root({className, ...props}:InputRootProps) {
-  return <div className={classNames('p-3 rounded text-red-100 border border-base-button bg-base-input', className)} {...props}/>  
+  return <label className={classNames('', className)} {...props}/>  
 }

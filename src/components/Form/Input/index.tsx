@@ -1,5 +1,5 @@
 import { Root } from "./Root"
 import { Control } from "./Control"
-import { IndicatorOpctional } from "./IndicatorOpcional"
+import { ErrorMessage } from "./ErrorMessagem"
 
-export { Root, Control, IndicatorOpctional }
+export { Root, Control, ErrorMessage }

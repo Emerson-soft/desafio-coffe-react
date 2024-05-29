@@ -1,5 +1,6 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from "@phosphor-icons/react";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 const initialState = {
   credit: false,
@@ -13,7 +14,8 @@ type IopctionsPayment = keyof typeof initialState
 export function PaymentMethod() {
 
   const [select, setSelect] = useState<InitialState>(initialState)
-
+  const { setValue } = useFormContext()
+    
   function handleSelectedPaymentMethod(method: IopctionsPayment) {
     setSelect(() => {
       return {
@@ -21,6 +23,8 @@ export function PaymentMethod() {
         [method]: true
       }
     })
+
+    setValue('paymentMethod', method)
   }
 
   return (

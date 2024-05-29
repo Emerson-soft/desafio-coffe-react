@@ -6,9 +6,9 @@ import { Router } from './router/Route'
 
 export function App() {
   return (
-    <div className='max-w-screen mx-auto px-5 antialiased mb-40 font-roboto bg-backgournd'>      
+    <div className='max-w-screen mx-auto px-5  antialiased font-roboto'>      
       <BrowserRouter>
-        <Router />        
+        <Router />                
       </BrowserRouter>      
     </div>
   )

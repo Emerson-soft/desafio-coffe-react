@@ -10,6 +10,17 @@ export interface IProduct {
   photo: string
 }
 
+export interface IFormDelivery {
+  cep: string
+  street: string
+  number: string
+  complement?: string
+  neighborhood: string
+  city: string
+  state: string
+  paymentMethod: string
+}
+
 export interface ICheckout extends IProduct {
   quantity: number
 }
@@ -21,12 +32,15 @@ interface IStore {
   total: number
   taxDelivery: number
   totalItems: number
+  formDelivery: IFormDelivery
   loadProducts: () => Promise<void>
   addCheckout: (product: IProduct, quantity: number) => void
   updateTotal: () => void
   increment: (checkout: ICheckout) => void
   decrement: (checkout: ICheckout) => void
   removeCheckout: (id: string) => void
+  updateFormDelivery: (data: IFormDelivery) => void
+  resetCheckout: () => void
 }
 
 export const useStore = create<IStore>((set, get) => ({
@@ -36,11 +50,22 @@ export const useStore = create<IStore>((set, get) => ({
   taxDelivery: 3.5,
   total: 0,
   totalItems: 0,
+  formDelivery: {
+    cep: '',
+    street: '',
+    number: '',
+    complement: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    paymentMethod: ''
+  },
 
   loadProducts: async () => {
     const { data } = await getProductsApi()
     set({ product: data })
   },
+  
   addCheckout: (product: IProduct, quantity: number) => {
 
     const { checkouts, updateTotal } = get()
@@ -108,5 +133,19 @@ export const useStore = create<IStore>((set, get) => ({
       checkouts: [...newCheckout]
     })
     updateTotal()
-  }
+  },
+
+  updateFormDelivery: (data: IFormDelivery) => {
+    set({
+      formDelivery: data
+    })
+  },
+
+  resetCheckout: () => {
+    set({
+      checkouts: [],
+      total: 0,
+      totalItems: 0
+    })
+  }  
 }))
